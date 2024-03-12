@@ -1,27 +1,63 @@
-﻿using Application.LogicInterfaces;
+﻿using Application.DaoInterfaces;
+using Application.LogicInterfaces;
 using Domain.Model;
 
 namespace Application;
 
 public class StoryLogic : IStoryLogic
 {
-    public Task<Story> CreateStoryAsync(string title, string body)
+    private readonly IStoryDAO storyDAO;
+
+    public StoryLogic(IStoryDAO storyDAO)
     {
-        throw new NotImplementedException();
+        this.storyDAO = storyDAO;
+    }
+    
+    public async Task<Story> CreateStoryAsync(string title, string body)
+    {
+        IEnumerable<Story> existing = await FindStoriesAsync(title, body);
+        if(existing != null)
+        {
+            throw new Exception($"A story with the same title and body already exists");
+        }
+
+        Story story = new Story{
+            title = title,
+            body = body
+        };
+
+        Story created = await storyDAO.CreateStoryAsync(story);
+        return created;
     }
 
-    public Task<Story> DeleteStoryAsync(int storyId)
+    public async Task<Story> DeleteStoryAsync(int storyId)
     {
-        throw new NotImplementedException();
+        return await storyDAO.DeleteStoryAsync(storyId);
     }
 
-    public Task<IEnumerable<Story>> GetAllStoriesAsync()
+    public async Task<IEnumerable<Story>> FindStoriesAsync(string? title, string? body)
     {
-        throw new NotImplementedException();
+        IEnumerable<Story> stories = await storyDAO.GetAllStoriesAsync();
+
+        if(title != null)
+        {
+            stories.Where(s => s.title.Equals(title));
+        }
+        if(body != null)
+        {
+            stories.Where(s => s.body.Equals(body));
+        }
+
+        return stories;
     }
 
-    public Task<Story> GetStoryAsync(int storyId)
+    public async Task<IEnumerable<Story>> GetAllStoriesAsync()
     {
-        throw new NotImplementedException();
+        return await storyDAO.GetAllStoriesAsync();
+    }
+
+    public async Task<Story> GetStoryByIdAsync(int storyId)
+    {
+        return await storyDAO.GetStoryByIdAsync(storyId);
     }
 }
