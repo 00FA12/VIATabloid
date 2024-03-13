@@ -2,7 +2,7 @@
 using Application.LogicInterfaces;
 using Domain.Model;
 
-namespace Application;
+namespace Application.Logic;
 
 public class StoryLogic : IStoryLogic
 {

@@ -2,6 +2,8 @@
 
 public class Department
 {
-    public IEnumerable<Story> stories {get; set;}
     public int id {get; set;}
+    public string name {get; set;}
+    public IEnumerable<Story> stories {get; set;}
+
 }
