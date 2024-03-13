@@ -72,5 +72,4 @@ public class DepartmentController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
-
 }
