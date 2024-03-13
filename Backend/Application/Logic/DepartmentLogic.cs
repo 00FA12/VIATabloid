@@ -43,16 +43,4 @@ public class DepartmentLogic : IDepartmentLogic
     {
         return await departmentDao.GetDepartmentsAsync();
     }
-
-    public async Task<IEnumerable<Story>> GetStoriesByDepartmentId(int depId)
-    {
-        Department department = await departmentDao.GetDepartmentByIdAsync(depId);
-        IList<Story> stories = new List<Story>();
-        foreach(var sId in department.stories)
-        {
-            stories.Add(await storyDAO.GetStoryByIdAsync(sId));
-        }
-
-        return stories;
-    }
 }
