@@ -8,4 +8,6 @@ public interface IDepartmentLogic
     Task<Department> DeleteDepartmentAsync(int depId);
     Task<IEnumerable<Department>> GetDepartmentsAsync();
     Task<Department> GetDepartmentByIdAsync(int depId);    
+    Task<Story> AddStoryAsync(int departmentId, int storyId);
+    Task<Story> RemoveStoryAsync(int storyId);
 }

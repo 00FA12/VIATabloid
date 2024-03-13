@@ -15,6 +15,27 @@ public class DepartmentLogic : IDepartmentLogic
         this.departmentDao = departmentDao;
         this.storyDAO = storyDAO;
     }
+
+    public async Task<Story> AddStoryAsync(int departmentId, int storyId)
+    {
+        Department? existing = await departmentDao.GetDepartmentByIdAsync(departmentId);
+        if(existing == null)
+        {
+            throw new Exception($"there is no department with id {departmentId}");
+        }
+        Story? existing2 = await storyDAO.GetStoryByIdAsync(storyId);
+        if(existing2 == null)
+        {
+            throw new Exception($"there is no story with id {storyId}");
+        }
+
+        List<int> stories = existing.stories.ToList();
+        stories.Add(storyId);
+        existing.stories = stories;
+        await departmentDao.UpdateDepartmentAsync(existing);
+        return existing2;
+    }
+
     public async Task<Department> CreateDepartmentAsync(string name)
     {
         IEnumerable<Department> departments = await departmentDao.GetDepartmentsAsync();
@@ -42,5 +63,35 @@ public class DepartmentLogic : IDepartmentLogic
     public async Task<IEnumerable<Department>> GetDepartmentsAsync()
     {
         return await departmentDao.GetDepartmentsAsync();
+    }
+
+    public async Task<Story> RemoveStoryAsync(int storyId)
+    {
+        IEnumerable<Department> dps = await departmentDao.GetDepartmentsAsync();
+        int depId = -1;
+        foreach(var dep in dps)
+        {
+            int stId = dep.stories.FirstOrDefault(s => s == storyId);
+            if(stId == storyId)
+            {
+                depId = dep.id;
+            }
+        }
+        if(depId == -1)
+        {
+            throw new Exception($"there is no department with id {depId}");
+        }
+        Department existing = await GetDepartmentByIdAsync(depId); 
+        Story? existing2 = await storyDAO.GetStoryByIdAsync(storyId);
+        if(existing2 == null)
+        {
+            throw new Exception($"there is no story with id {storyId}");
+        }
+
+        List<int> stories = existing.stories.ToList();
+        stories.Remove(storyId);
+        existing.stories = stories;
+        await departmentDao.UpdateDepartmentAsync(existing);
+        return existing2;
     }
 }

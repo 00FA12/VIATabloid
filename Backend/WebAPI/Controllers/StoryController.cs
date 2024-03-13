@@ -20,7 +20,7 @@ public class StoryController : ControllerBase
     {
         try
         {
-            Story? story = await storyLogic.CreateStoryAsync(storyDTO.title, storyDTO.body);
+            Story? story = await storyLogic.CreateStoryAsync(storyDTO.title, storyDTO.body, storyDTO.departmentId);
             return Created($"/stories/{story.id}", story);
         }
         catch (Exception e)
