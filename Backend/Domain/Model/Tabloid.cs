@@ -2,5 +2,5 @@
 
 public class Tabloid
 {
-    public IEnumerable<Department> departments {get; set;}
+    public IEnumerable<int> departments {get; set;}
 }

@@ -1,5 +1,6 @@
 ﻿using Application.DaoInterfaces;
 using Application.LogicInterfaces;
+using Domain.DTOs;
 using Domain.Model;
 
 namespace Application.Logic;
@@ -7,10 +8,12 @@ namespace Application.Logic;
 public class DepartmentLogic : IDepartmentLogic
 {
     private readonly IDepartmentDAO departmentDao;
+    private readonly IStoryDAO storyDAO;
 
-    public DepartmentLogic(IDepartmentDAO departmentDao)
+    public DepartmentLogic(IDepartmentDAO departmentDao, IStoryDAO storyDAO)
     {
         this.departmentDao = departmentDao;
+        this.storyDAO = storyDAO;
     }
     public async Task<Department> CreateDepartmentAsync(string name)
     {
@@ -21,12 +24,7 @@ public class DepartmentLogic : IDepartmentLogic
             throw new Exception("A department with the same name already exists");
         }
 
-        Department department = new Department{
-            name = name,
-            stories = new List<Story>()
-        };
-        //Will give error if no solution is given for ID's
-        //TODO Create DTOs to be able to create objects with no Id's
+        DepartmentDTO department = new DepartmentDTO(name);
         Department created = await departmentDao.CreateDepartmentAsync(department);
         return created;
     }
@@ -49,6 +47,12 @@ public class DepartmentLogic : IDepartmentLogic
     public async Task<IEnumerable<Story>> GetStoriesByDepartmentId(int depId)
     {
         Department department = await departmentDao.GetDepartmentByIdAsync(depId);
-        return department.stories;
+        IList<Story> stories = new List<Story>();
+        foreach(var sId in department.stories)
+        {
+            stories.Add(await storyDAO.GetStoryByIdAsync(sId));
+        }
+
+        return stories;
     }
 }

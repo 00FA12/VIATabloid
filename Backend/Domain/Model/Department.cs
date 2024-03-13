@@ -4,6 +4,6 @@ public class Department
 {
     public int id {get; set;}
     public string name {get; set;}
-    public IEnumerable<Story> stories {get; set;}
+    public IEnumerable<int> stories {get; set;}
 
 }

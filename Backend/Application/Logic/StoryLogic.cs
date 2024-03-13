@@ -1,5 +1,6 @@
 ﻿using Application.DaoInterfaces;
 using Application.LogicInterfaces;
+using Domain.DTOs;
 using Domain.Model;
 
 namespace Application.Logic;
@@ -21,10 +22,7 @@ public class StoryLogic : IStoryLogic
             throw new Exception($"A story with the same title and body already exists");
         }
 
-        Story story = new Story{
-            title = title,
-            body = body
-        };
+        StoryDTO story = new StoryDTO(title, body);
 
         Story created = await storyDAO.CreateStoryAsync(story);
         return created;
