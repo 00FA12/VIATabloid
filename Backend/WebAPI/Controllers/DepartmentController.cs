@@ -9,9 +9,11 @@ namespace WebAPI;
 public class DepartmentController : ControllerBase
 {
     private readonly IDepartmentLogic departmentLogic;
-    public DepartmentController(IDepartmentLogic departmentLogic)
+    private readonly ITabloidLogic tabloidLogic;
+    public DepartmentController(IDepartmentLogic departmentLogic, ITabloidLogic tabloidLogic)
     {
         this.departmentLogic = departmentLogic;
+        this.tabloidLogic = tabloidLogic;
     }
     [HttpPost]
     public async Task<ActionResult<Department>> CreateDepartmentAsync(DepartmentDTO departmentDTO)
@@ -19,6 +21,7 @@ public class DepartmentController : ControllerBase
         try
         {
             Department? department = await departmentLogic.CreateDepartmentAsync(departmentDTO.name);
+            await tabloidLogic.AddDepartmentAsync(department.id);
             return Created($"/department/{department.id}", department);
         }
         catch(Exception e)
