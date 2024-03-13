@@ -16,7 +16,7 @@ public class StoryLogic : IStoryLogic
     
     public async Task<Story> CreateStoryAsync(string title, string body)
     {
-        IEnumerable<Story> existing = await FindStoriesAsync(title, body);
+        IEnumerable<Story> existing = await GetStoriesAsync(title, body);
         if(existing != null)
         {
             throw new Exception($"A story with the same title and body already exists");
@@ -33,7 +33,7 @@ public class StoryLogic : IStoryLogic
         return await storyDAO.DeleteStoryAsync(storyId);
     }
 
-    public async Task<IEnumerable<Story>> FindStoriesAsync(string? title, string? body)
+    public async Task<IEnumerable<Story>> GetStoriesAsync(string? title, string? body)
     {
         IEnumerable<Story> stories = await storyDAO.GetAllStoriesAsync();
 
@@ -47,11 +47,6 @@ public class StoryLogic : IStoryLogic
         }
 
         return stories;
-    }
-
-    public async Task<IEnumerable<Story>> GetAllStoriesAsync()
-    {
-        return await storyDAO.GetAllStoriesAsync();
     }
 
     public async Task<Story> GetStoryByIdAsync(int storyId)
