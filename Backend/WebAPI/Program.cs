@@ -1,9 +1,23 @@
+using Application.DaoInterfaces;
+using Application.Logic;
+using Application.LogicInterfaces;
+using DBConnection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers();
+builder.Services.AddScoped<IStoryDAO, StoryDAO>();
+builder.Services.AddScoped<IDepartmentDAO, DepartmentDAO>();
+builder.Services.AddScoped<ITabloidDao, TabloidDAO>();
+builder.Services.AddScoped<ITabloidLogic, TabloidLogic>();
+builder.Services.AddScoped<IStoryLogic, StoryLogic>();
+builder.Services.AddScoped<IDepartmentLogic, DepartmentLogic>();
+
 
 var app = builder.Build();
 
