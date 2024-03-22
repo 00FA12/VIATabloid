@@ -7,7 +7,7 @@ namespace DBConnection;
 
 public class DepartmentDAO : IDepartmentDAO
 {
-    string connectionString = "Host=localhost;Port:5432;Database=postgres;Username=postgres;Password=password";
+    string connectionString = "Host=tabloid-db;Database=postgres;Username=postgres;Password=password";
 
     private NpgsqlConnection GetConnection()
     {

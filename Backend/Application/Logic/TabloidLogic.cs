@@ -28,11 +28,11 @@ public class TabloidLogic : ITabloidLogic
     }
     public async Task<Tabloid> CreateTabloidAsync()
     {
-        Tabloid? existing = await tabloidDao.GetTabloidAsync();
-        if(existing != null)
-        {
-            throw new Exception("A Tabloid Already exists");
-        }
+        // Tabloid? existing = await tabloidDao.GetTabloidAsync();
+        // if(existing != null)
+        // {
+        //     throw new Exception("A Tabloid Already exists");
+        // }
         return await tabloidDao.CreateTabloidAsync();
     }
     public async Task<Department> RemoveDepartmentAsync(int departmentId)

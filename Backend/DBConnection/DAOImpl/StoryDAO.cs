@@ -8,7 +8,7 @@ namespace DBConnection;
 
 public class StoryDAO : IStoryDAO
 {
-    string connectionString = "Host=localhost;Port:5432;Database=postgres;Username=postgres;Password=password";
+    string connectionString = "Host=tabloid-db;Database=postgres;Username=postgres;Password=password";
 
     private NpgsqlConnection GetConnection()
     {

@@ -28,16 +28,15 @@ app.UseCors(x => x
     .AllowCredentials());
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
 
-app.UseHttpsRedirection();
+
 app.MapControllers();
-app.Urls.Add("https://localhost:7112");
-app.UseHttpsRedirection();
+app.Urls.Add("http://0.0.0.0:7112");
+
 
 
 app.Run();
