@@ -3,39 +3,50 @@ using Domain.DTOs;
 using Domain.Model;
 using System;
 using Npgsql;
+using NpgsqlTypes;
+using System.Data.Common;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DBConnection;
 
 public class StoryDAO : IStoryDAO
 {
-    string connectionString = "Host=tabloid-db;Database=postgres;Username=postgres;Password=password";
+    string connectionString = "Username=postgres;Password=password;Server=localhost;Port=5432;Database=postgres;SearchPath=viatabloid";
 
-    private NpgsqlConnection GetConnection()
+    private NpgsqlDataSource GetConnection()
     {
-        return new NpgsqlConnection(connectionString);
+        return NpgsqlDataSource.Create(connectionString);
     }
 
     public Task<Story> CreateStoryAsync(StoryDTO storyDTO)
     {
         try
         {
-            NpgsqlConnection connection = GetConnection();
-            connection.Open();
-            using var cmd = new NpgsqlCommand("INSERT INTO story (title, body) VALUES (?, ?) RETURNING id", connection);
-            cmd.Parameters.AddWithValue("title", storyDTO.title);
-            cmd.Parameters.AddWithValue("body", storyDTO.body);
-            using var reader = cmd.ExecuteReader();
-            var returnedValue = reader["id"];
+            int id = 0;
+
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO story (title, body) VALUES (@title, @body) RETURNING id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@title", storyDTO.title);
+                    cmd.Parameters.AddWithValue("@body", storyDTO.body);
+                    id = (int)cmd.ExecuteScalar()!;
+
+                }
+                conn.Close();
+            }
             Story created = new()
             {
                 title = storyDTO.title,
                 body = storyDTO.body,
-                id = (int)returnedValue
+                id = id
             };
-            connection.Close();
             return Task.FromResult(created);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new Exception(e.Message);
         }
@@ -43,91 +54,112 @@ public class StoryDAO : IStoryDAO
 
     public Task<Story> DeleteStoryAsync(int storyId)
     {
+        string title;
+        string body;
         try
         {
-            NpgsqlConnection connection = GetConnection();
-            connection.Open();
-            using var cmd = new NpgsqlCommand("SELECT * FROM story WHERE id=?", connection);
-            cmd.Parameters.AddWithValue("id", storyId);
-            using var reader = cmd.ExecuteReader();
-            var stTitle = reader["title"];
-            var stBody = reader["body"];
-            using var cmd2 = new NpgsqlCommand("DELETE FROM story WHERE id=?", connection);
-            cmd2.Parameters.AddWithValue("id", storyId);
-            cmd2.ExecuteNonQuery();
-            Story created = new Story{
-                title = (string)stTitle,
-                body = (string)stBody,
-                id = storyId
-            };
-            connection.Close();
-            return Task.FromResult(created);
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand("SELECT * FROM story WHERE id=@value1", conn))
+                {
+                    cmd.Parameters.AddWithValue("@value1", storyId);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        reader.Read();
+                        title = reader.GetString(reader.GetOrdinal("title"));
+                        body = reader.GetString(reader.GetOrdinal("body"));
+                        conn.Close();
+                    }
+                }
+                conn.Open();
+                using (var cmd2 = new NpgsqlCommand("DELETE FROM story WHERE id=@value1", conn))
+                {
+                    cmd2.Parameters.AddWithValue("@value1", storyId);
+                    cmd2.ExecuteNonQuery();
+                    Story created = new Story
+                    {
+                        title = title,
+                        body = body,
+                        id = storyId
+                    };
+                    conn.Close();
+                    return Task.FromResult(created);
+                }
+
+            }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new Exception(e.Message);
         }
     }
 
-    public Task<IEnumerable<Story>> GetAllStoriesAsync()
+    public async Task<IEnumerable<Story>> GetAllStoriesAsync()
     {
         try
         {
-            var stories = new List<Story>();
-            NpgsqlConnection connection = GetConnection();
-            connection.Open();
-            using var cmd = new NpgsqlCommand("SELECT * FROM story", connection);
-            using var reader = cmd.ExecuteReader();
-
+            NpgsqlDataSource dataSource = GetConnection();
+            await using var command = dataSource.CreateCommand("SELECT * FROM story");
+            await using var reader = await command.ExecuteReaderAsync();
+            IList<Story> created = new List<Story>();
             while (reader.Read())
             {
-                var title = reader.GetString(reader.GetOrdinal("title"));
-                var body = reader.GetString(reader.GetOrdinal("body"));
-                var id = reader.GetInt32(reader.GetOrdinal("id"));
-                stories.Add(new Story{
-                    title = title,
-                    body = title,
-                    id = id
+                created.Add(new Story
+                {
+                    id = reader.GetInt32(0),
+                    title = reader.GetString(1),
+                    body = reader.GetString(2)
                 });
             }
-            connection.Close();
-            return Task.FromResult(stories.AsEnumerable());
+            return created.AsEnumerable();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new Exception(e.Message);
         }
     }
 
-    public Task<Story> GetStoryByIdAsync(int storyId)
+    public Task<Story?>? GetStoryByIdAsync(int storyId)
     {
         try
         {
-            NpgsqlConnection connection = GetConnection();
-            connection.Open();
-            using var cmd = new NpgsqlCommand("SELECT * FROM story WHERE id = ?", connection);
-            cmd.Parameters.AddWithValue("id", storyId);
-            Story story = new();
-
-            using var reader = cmd.ExecuteReader();
-            while(reader.Read())
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
             {
-                if(reader.GetInt32(reader.GetOrdinal("id")) == storyId)
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM story WHERE id = @value1", conn))
                 {
-                    var title = reader.GetString(reader.GetOrdinal("title"));
-                    var body = reader.GetString(reader.GetOrdinal("body"));
-                    var id = reader.GetInt32(reader.GetOrdinal("id"));
-                    story = new Story{
-                    title = title,
-                    body = title,
-                    id = id
-                    };
+                    cmd.Parameters.AddWithValue("@value1", storyId);
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        reader.Read();
+                        try
+                        {
+                            var id = reader.GetInt32(reader.GetOrdinal("id"));
+                            var title = reader.GetString(reader.GetOrdinal("title"));
+                            var body = reader.GetString(reader.GetOrdinal("body"));
+                            Story? created = new()
+                            {
+                                title = title,
+                                body = body,
+                                id = id
+                            };
+                            conn.Close();
+                            return Task.FromResult(created)!;
+                        }
+                        catch
+                        {
+                            return null;
+                        }
+
+                    }
                 }
             }
-            connection.Close();
-            return Task.FromResult(story);
+
+
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new Exception(e.Message);
         }

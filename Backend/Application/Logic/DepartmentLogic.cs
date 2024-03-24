@@ -23,12 +23,15 @@ public class DepartmentLogic : IDepartmentLogic
         {
             throw new Exception($"there is no department with id {departmentId}");
         }
-        Story? existing2 = await storyDAO.GetStoryByIdAsync(storyId);
+        Story? existing2 = await storyDAO.GetStoryByIdAsync(storyId)!;
         if(existing2 == null)
         {
-            throw new Exception($"there is no story with id {storyId}");
+            throw new Exception($"the story wasn't created succesfully");
         }
-
+        if(existing.stories == null)
+        {
+            existing.stories = new List<int>();
+        }
         List<int> stories = existing.stories.ToList();
         stories.Add(storyId);
         existing.stories = stories;
@@ -71,7 +74,7 @@ public class DepartmentLogic : IDepartmentLogic
         int depId = -1;
         foreach(var dep in dps)
         {
-            int stId = dep.stories.FirstOrDefault(s => s == storyId);
+            int? stId = dep.stories.FirstOrDefault(s => s == storyId);
             if(stId == storyId)
             {
                 depId = dep.id;

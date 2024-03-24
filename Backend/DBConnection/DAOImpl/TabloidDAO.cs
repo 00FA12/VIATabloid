@@ -6,7 +6,7 @@ namespace DBConnection;
 
 public class TabloidDAO : ITabloidDao
 {
-    string connectionString = "Username=postgres;Password=postgres;Server=localhost;Port=5432;Database=postgres;";
+    string connectionString = "Username=postgres;Password=password;Server=localhost;Port=5432;Database=postgres;SearchPath=viatabloid";
 
     private NpgsqlDataSource GetConnection()
     {
@@ -29,39 +29,42 @@ public class TabloidDAO : ITabloidDao
             throw new Exception(e.Message);
         }
     }
-
-    public Task<Tabloid?> GetTabloidAsync()
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<Tabloid> UpdateTabloidAsync(Tabloid tabloid)
     {
         throw new NotImplementedException();
     }
 
-    // public Task<Tabloid?> GetTabloidAsync()
-    // {
-    //     try
-    //     {
-    //         NpgsqlConnection connection = GetConnection();
-    //         connection.Open();
-    //         using var cmd = new NpgsqlCommand("SELECT * FROM tabloid", connection);                  
-    //         using var reader = cmd.ExecuteReader();
-    //         reader.Read();
-    //         if(reader.GetInt32(reader.GetOrdinal("id")) != 1)
-    //         {
-    //             return null;
-    //         }
-    //         Tabloid tabloid = new();
-    //         connection.Close();
-    //         return Task.FromResult(tabloid);
-    //     }
-    //     catch(Exception e)
-    //     {
-    //         throw new Exception(e.Message);
-    //     }        
-    // }
+    public async Task<Tabloid?> GetTabloidAsync()
+    {
+        try
+        {
+            NpgsqlDataSource dataSource = GetConnection();
+            await using var command = dataSource.CreateCommand("SELECT id FROM tabloid");
+            await using var reader = await command.ExecuteReaderAsync();
+            await reader.ReadAsync();
+            var returnedValue = reader.GetInt32(0);
+            if(returnedValue != 1)
+            {
+                return null;
+            }
+            Tabloid tabloid = new();
+            await using var cmd = dataSource.CreateCommand("SELECT * FROM department WHERE tabloidid = 1");
+            await using var rd = await cmd.ExecuteReaderAsync();
+            IList<int> departments = new List<int>();
+            while (rd.Read())
+            {
+                var id = rd.GetInt32(rd.GetOrdinal("id"));
+                departments.Add(id);
+            }
+            tabloid.departments = departments.AsEnumerable();
+
+            return tabloid;
+        }
+        catch(Exception e)
+        {
+            throw new Exception(e.Message);
+        }        
+    }
 
     // public Task<Tabloid> UpdateTabloidAsync(Tabloid tabloid)
     // {

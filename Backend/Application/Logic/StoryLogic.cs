@@ -18,7 +18,8 @@ public class StoryLogic : IStoryLogic
     
     public async Task<Story> CreateStoryAsync(string title, string body, int departmentId)
     {
-        IEnumerable<Story> existing = await GetStoriesAsync(title, body);
+        IEnumerable<Story> sts = await GetStoriesAsync(title, body);
+        Story? existing = sts.ElementAt(0);
         if(existing != null)
         {
             throw new Exception($"A story with the same title and body already exists");
@@ -39,7 +40,7 @@ public class StoryLogic : IStoryLogic
             throw new Exception($"A story with id {storyId} doesn't exist");
         }
         await storyDAO.DeleteStoryAsync(storyId);
-        await departmentLogic.RemoveStoryAsync(storyId);
+        // await departmentLogic.RemoveStoryAsync(storyId);
         return existing;
     }
 
@@ -47,20 +48,25 @@ public class StoryLogic : IStoryLogic
     {
         IEnumerable<Story> stories = await storyDAO.GetAllStoriesAsync();
 
-        if(title != null)
+        if(!String.IsNullOrEmpty(title))
         {
-            stories.Where(s => s.title.Equals(title));
+            stories = stories.Where(s => s.title.Contains(title));
         }
-        if(body != null)
+        if(!String.IsNullOrEmpty(body))
         {
-            stories.Where(s => s.body.Equals(body));
+            stories = stories.Where(s => s.body.Contains(body));
         }
 
         return stories;
     }
 
-    public async Task<Story> GetStoryByIdAsync(int storyId)
+    public async Task<Story?>? GetStoryByIdAsync(int storyId)
     {
-        return await storyDAO.GetStoryByIdAsync(storyId);
+        Story? existing = await storyDAO.GetStoryByIdAsync(storyId);
+        if(existing == null)
+        {
+            throw new Exception($"No story was found with id: {storyId}");
+        }
+        return existing;
     }
 }

@@ -21,8 +21,8 @@ public class TabloidLogic : ITabloidLogic
         {
             throw new Exception($"There is no department with id {departmentId}");
         }
-        Tabloid? tabloid = await GetTabloidAsync();
-        tabloid?.departments.Append(departmentId);
+        Tabloid tabloid = await GetTabloidAsync();
+        tabloid!.departments.Append(departmentId);
         await UpdateTabloidAsync(tabloid!);
         return existing;
     }

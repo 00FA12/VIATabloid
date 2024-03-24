@@ -8,5 +8,5 @@ public interface IStoryDAO
     Task<Story> CreateStoryAsync(StoryDTO storyDTO);
     Task<Story> DeleteStoryAsync(int storyId);
     Task<IEnumerable<Story>> GetAllStoriesAsync();
-    Task<Story> GetStoryByIdAsync(int storyId);
+    Task<Story?>? GetStoryByIdAsync(int storyId);
 }

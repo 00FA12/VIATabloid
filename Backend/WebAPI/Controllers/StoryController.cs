@@ -47,11 +47,11 @@ public class StoryController : ControllerBase
     }
 
     [HttpGet ("{id:int}")]
-    public async Task<ActionResult<Story>> GetStoryById([FromRoute] int id)
+    public async Task<ActionResult<Story?>> GetStoryById([FromRoute] int id)
     {
         try
         {
-            Story? story = await storyLogic.GetStoryByIdAsync(id);
+            Story? story = await storyLogic.GetStoryByIdAsync(id)!;
             return Ok(story);
         }
         catch (Exception e)
@@ -61,7 +61,7 @@ public class StoryController : ControllerBase
         }
     }
 
-    [HttpDelete]
+    [HttpDelete ("{id:int}")]
     public async Task<ActionResult> DeleteStoryAsync([FromRoute] int id)
     {        
         try

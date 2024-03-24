@@ -21,7 +21,7 @@ public class DepartmentController : ControllerBase
         try
         {
             Department? department = await departmentLogic.CreateDepartmentAsync(departmentDTO.name);
-            await tabloidLogic.AddDepartmentAsync(department.id);
+            // await tabloidLogic.AddDepartmentAsync(department.id);
             return Created($"/department/{department.id}", department);
         }
         catch(Exception e)
@@ -31,7 +31,7 @@ public class DepartmentController : ControllerBase
         }
     }
 
-    [HttpDelete]
+    [HttpDelete ("{id:int}")]
     public async Task<ActionResult> DeleteDepartmentAsync([FromRoute] int id)
     {
         try
