@@ -20,3 +20,5 @@ CREATE TABLE story(
     body text,
     departmentId INT REFERENCES department(id)
 );
+
+INSERT INTO tabloid (id) VALUES (1);
