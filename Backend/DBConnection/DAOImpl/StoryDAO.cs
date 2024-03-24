@@ -12,7 +12,7 @@ namespace DBConnection;
 
 public class StoryDAO : IStoryDAO
 {
-    string connectionString = "Username=postgres;Password=password;Server=localhost;Port=5432;Database=postgres;SearchPath=viatabloid";
+    string connectionString = "Username=postgres;Password=password;Server=172.18.0.2;Port=5432;Database=postgres;SearchPath=viatabloid";
 
     private NpgsqlDataSource GetConnection()
     {
