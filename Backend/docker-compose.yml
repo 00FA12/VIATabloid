@@ -15,6 +15,7 @@ services:
 
   db:
     image: 'db:v2'
+    container_name: "db"
     build:
       context: ./
       dockerfile: ./DB/Dockerfile
