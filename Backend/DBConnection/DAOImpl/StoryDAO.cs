@@ -1,22 +1,18 @@
 ﻿using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Model;
-using System;
 using Npgsql;
-using NpgsqlTypes;
-using System.Data.Common;
-using System.Reflection.Metadata;
-using System.Reflection.Metadata.Ecma335;
+
 
 namespace DBConnection;
 
 public class StoryDAO : IStoryDAO
 {
-    string connectionString = "Username=postgres;Password=password;Server=172.18.0.2;Port=5432;Database=postgres;SearchPath=viatabloid";
+    string _connectionString = Environment.GetEnvironmentVariable("ConnectionString");
 
     private NpgsqlDataSource GetConnection()
     {
-        return NpgsqlDataSource.Create(connectionString);
+        return NpgsqlDataSource.Create(_connectionString);
     }
 
     public Task<Story> CreateStoryAsync(StoryDTO storyDTO)
@@ -25,7 +21,7 @@ public class StoryDAO : IStoryDAO
         {
             int id = 0;
 
-            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
             {
                 conn.Open();
 
@@ -58,7 +54,7 @@ public class StoryDAO : IStoryDAO
         string body;
         try
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
             {
                 conn.Open();
                 using (var cmd = new NpgsqlCommand("SELECT * FROM story WHERE id=@value1", conn))
@@ -124,7 +120,7 @@ public class StoryDAO : IStoryDAO
     {
         try
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
             {
                 conn.Open();
 

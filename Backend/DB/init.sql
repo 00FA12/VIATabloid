@@ -1,5 +1,3 @@
-DROP SCHEMA IF EXISTS viatabloid;
-
 CREATE SCHEMA IF NOT EXISTS viatabloid;
 SET SCHEMA 'viatabloid';
 SET search_path = viatabloid;

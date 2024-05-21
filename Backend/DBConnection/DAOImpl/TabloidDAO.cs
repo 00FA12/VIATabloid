@@ -6,11 +6,11 @@ namespace DBConnection;
 
 public class TabloidDAO : ITabloidDao
 {
-    string connectionString = "Username=postgres;Password=password;Server=172.18.0.2;Port=5432;Database=postgres;SearchPath=viatabloid";
+    string _connectionString = Environment.GetEnvironmentVariable("ConnectionString");
 
     private NpgsqlDataSource GetConnection()
     {
-        return NpgsqlDataSource.Create(connectionString);
+        return NpgsqlDataSource.Create(_connectionString);
     }
     public async Task<Tabloid> CreateTabloidAsync()
     {

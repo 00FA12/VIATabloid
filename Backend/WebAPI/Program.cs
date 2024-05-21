@@ -10,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+// builder.Configuration.AddEnvironmentVariables();
+
+
 builder.Services.AddControllers();
 builder.Services.AddScoped<IStoryDAO, StoryDAO>();
 builder.Services.AddScoped<IDepartmentDAO, DepartmentDAO>();
@@ -17,6 +21,7 @@ builder.Services.AddScoped<ITabloidDao, TabloidDAO>();
 builder.Services.AddScoped<ITabloidLogic, TabloidLogic>();
 builder.Services.AddScoped<IStoryLogic, StoryLogic>();
 builder.Services.AddScoped<IDepartmentLogic, DepartmentLogic>();
+
 
 
 var app = builder.Build();
@@ -35,7 +40,7 @@ app.UseCors(x => x
 
 
 app.MapControllers();
-app.Urls.Add("http://0.0.0.0:7112");
+app.Urls.Add("http://0.0.0.0:80");
 
 
 

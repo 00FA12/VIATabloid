@@ -1,0 +1,30 @@
+version: '4.0'
+services:
+  backend:
+    image: 'backend:v2'
+    build: 
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: "backend"
+    ports:
+      - 80:80
+    environment:
+      - ConnectionString=Username=postgres;Password=password;Server=db;Port=5432;Database=postgres;SearchPath=viatabloid
+    depends_on:
+      - db
+
+  db:
+    image: 'db:v2'
+    build:
+      context: ./
+      dockerfile: ./DB/Dockerfile
+    ports:
+      - 5432:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+volumes:
+  db:
+    driver: local
