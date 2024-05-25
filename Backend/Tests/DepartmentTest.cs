@@ -1,8 +1,6 @@
-using System.Data.Common;
 using Application.DaoInterfaces;
 using Application.Logic;
 using Application.LogicInterfaces;
-using DBConnection;
 using Domain.DTOs;
 using Domain.Model;
 using Moq;
@@ -24,94 +22,102 @@ public class DepartmentTest
     }
 
     [Fact]
-    public async Task CreateDepartmentAsync()
+    public async Task CreateDepartmentAsync_ShouldCreateAndReturnDepartment()
     {
+        //Arrange
         Department department = new Department
         {
             name = "testdpt"
         };
         _mockDepartmentDAO.Setup(db => db.CreateDepartmentAsync(It.IsAny<DepartmentDTO>())).ReturnsAsync(department);
 
+        //Act
         var result = await _departmentLogic.CreateDepartmentAsync("testdpt");
 
+        //Assert
         Assert.Equal("testdpt", result.name);
+        _mockDepartmentDAO.Verify(db => db.CreateDepartmentAsync(It.Is<DepartmentDTO>(dto => dto.name == "testdpt")), Times.Once);
     }
 
     [Fact]
-    public async Task GetDepartmentsAsync()
+    public async Task CreateDepartmentAsync_ShouldNotCreateDepartment()
     {
+        //Arrange
+        var existingDepartments = new List<Department>
+        {
+            new Department{name = "testdpt"}
+        };
+        _mockDepartmentDAO.Setup(d => d.GetDepartmentsAsync()).ReturnsAsync(existingDepartments);
+
+
+        //Act & Assert
+        var exception = await Assert.ThrowsAsync<Exception>(() => _departmentLogic.CreateDepartmentAsync("testdpt"));
+        Assert.Equal("A department with the same name already exists", exception.Message);
+    }
+
+    [Fact]
+    public async Task GetDepartmentsAsync_ShouldReturnListOfDepartments()
+    {
+        //Arrange
         Department department = new Department
         {
             name = "testdpt"
         };
-        IList<Department> departmentsList = new List<Department>();
-        departmentsList.Add(department);
+        IList<Department> departmentsList = [department];
         IEnumerable<Department> departments = departmentsList;
-
         _mockDepartmentDAO.Setup(db => db.GetDepartmentsAsync()).ReturnsAsync(departments.AsEnumerable());
 
-
+        //Act
         var result = await _departmentLogic.GetDepartmentsAsync();
+
+        //Assert
+        Assert.Single(result);
         Assert.Equal("testdpt", result.FirstOrDefault(d => d.name == "testdpt").name);
+        _mockDepartmentDAO.Verify(db => db.GetDepartmentsAsync(), Times.Once);
     }
 
     [Fact]
-    public async Task DeleteDepartmentAsync()
+    public async Task DeleteDepartmentAsync_ShouldDeleteAndReturnDepartment()
     {
-        Department department = new Department
-        {
-            name = "testdpt"
-        };
-
-        _mockDepartmentDAO.Setup(db => db.DeleteDepartmentAsync(It.IsAny<int>())).ReturnsAsync(department);
-
-        var result = await _departmentLogic.DeleteDepartmentAsync(department.id);
-        var results = await _departmentLogic.GetDepartmentsAsync();
-        Assert.Equal("testdpt", result.name);
-        Assert.Equal([], results);
-    }
-
-    [Fact]
-    public async Task GetDepartmentByIdAsync()
-    {
+        //Arrange
         Department department = new Department
         {
             name = "testdpt",
             id = 1
         };
+        _mockDepartmentDAO.Setup(db => db.DeleteDepartmentAsync(1)).ReturnsAsync(department);
+        _mockDepartmentDAO.Setup(db => db.GetDepartmentsAsync()).ReturnsAsync(Enumerable.Empty<Department>());
 
-        _mockDepartmentDAO.Setup(db => db.GetDepartmentByIdAsync(It.IsAny<int>())).ReturnsAsync(department);
+        //Act
+        var deleteResult = await _departmentLogic.DeleteDepartmentAsync(department.id);
+        var departmentsAfterDeletion = await _departmentLogic.GetDepartmentsAsync();
 
-        var result = await _departmentLogic.GetDepartmentByIdAsync(1);
-        Assert.Equal(1, result.id);
+
+        //Assert
+        Assert.Equal("testdpt", deleteResult.name);
+        Assert.Empty(departmentsAfterDeletion);
+        _mockDepartmentDAO.Verify(db => db.DeleteDepartmentAsync(It.Is<int>(id => id == 1)), Times.Once);
+        _mockDepartmentDAO.Verify(db => db.GetDepartmentsAsync(), Times.Once);
+
     }
 
-    // [Fact]
-    // public async Task AddStoryAsync()
-    // {
-    //     Department department = new Department
-    //     {
-    //         name = "testdpt",
-    //         id = 1
-    //     };
+    [Fact]
+    public async Task GetDepartmentByIdAsync_ShouldReturnDepartment()
+    {
+        //Arrange
+        Department department = new Department
+        {
+            name = "testdpt",
+            id = 1
+        };
+        _mockDepartmentDAO.Setup(db => db.GetDepartmentByIdAsync(It.IsAny<int>())).ReturnsAsync(department);
 
-    //     _mockDepartmentDAO.Setup(db => db.GetDepartmentByIdAsync(It.IsAny<int>())).ReturnsAsync(department);
+        //Act
+        var result = await _departmentLogic.GetDepartmentByIdAsync(1);
 
-    //     Story story = new Story
-    //     {
-    //         title = "testStory",
-    //         body = "testBody",
-    //         id = 1
-    //     };
-    //     _mockStoryDAO.Setup(db => db.CreateStoryAsync(It.IsAny<StoryDTO>())).ReturnsAsync(story);
-
-    //     var result = await _departmentLogic.AddStoryAsync(1, story.id);
-    //     Assert.Equal(story.title, result.title);
-    // }
-
-    // [Fact]
-    // public async Task RemoveStoryAsync()
-    // {
-
-    // }
+        //Assert
+        Assert.Equal(1, result.id);
+        Assert.Equal("testdpt", result.name);
+        _mockDepartmentDAO.Verify(db => db.GetDepartmentByIdAsync(It.Is<int>(id => id == 1)), Times.Once);
+    }
 }

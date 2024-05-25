@@ -1,0 +1,35 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.201'
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Test with coverage
+      run: dotnet test --no-build --collect:"XPlat Code Coverage"
+
+    - name: Generate coverage report
+      run: |
+        dotnet tool install --global dotnet-reportgenerator-globaltool
+        reportgenerator -reports:Tests/TestResults/*/coverage.cobertura.xml -targetdir:coverage_report -reporttypes:Html
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: coverage_report
