@@ -1,12 +1,6 @@
 name: CD - Deploy to Minikube using Github Actions
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   # Build job
@@ -42,10 +36,10 @@ jobs:
       - name: Test service URLs
         run: |
           echo "SERVICE_URL=$(minikube service cicd-example --url)"
-          kubectl port-forward service/cicd-example 8080:8080 &> /dev/null &
+          kubectl port-forward service/cicd-example 80:80 &> /dev/null &
           sleep 5
           kubectl port-forward service/cicd-example 8080:8080 &> /dev/null &
-          curl -i http://localhost:8080/
+          curl -i http://0.0.0.0:80/
 
       - name: Cleanup
         run: |
