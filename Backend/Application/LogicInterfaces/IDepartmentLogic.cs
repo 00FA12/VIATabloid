@@ -9,5 +9,5 @@ public interface IDepartmentLogic
     Task<IEnumerable<Department>> GetDepartmentsAsync();
     Task<Department> GetDepartmentByIdAsync(int depId);    
     Task<Story> AddStoryAsync(int departmentId, int storyId);
-    Task<Story> RemoveStoryAsync(int storyId);
+    // Task<Story> RemoveStoryAsync(int storyId);
 }

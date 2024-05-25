@@ -25,14 +25,14 @@ public class StoryDAO : IStoryDAO
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO story (title, body) VALUES (@title, @body) RETURNING id", conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO story (title, body, departmentId) VALUES (@title, @body, @departmentId) RETURNING id", conn))
                 {
                     cmd.Parameters.AddWithValue("@title", storyDTO.title);
                     cmd.Parameters.AddWithValue("@body", storyDTO.body);
+                    cmd.Parameters.AddWithValue("@departmentId", storyDTO.departmentId);
                     id = (int)cmd.ExecuteScalar()!;
 
                 }
-                conn.Close();
             }
             Story created = new()
             {

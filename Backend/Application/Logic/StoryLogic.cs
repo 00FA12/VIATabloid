@@ -19,16 +19,21 @@ public class StoryLogic : IStoryLogic
     public async Task<Story> CreateStoryAsync(string title, string body, int departmentId)
     {
         IEnumerable<Story> sts = await GetStoriesAsync(title, body);
-        Story? existing = sts.ElementAt(0);
-        if(existing != null)
+        if(sts.Any())
         {
             throw new Exception($"A story with the same title and body already exists");
+        }
+
+        Department? department = await departmentLogic.GetDepartmentByIdAsync(departmentId);
+        if(department == null)
+        {
+            throw new Exception($"Could not find department with id {departmentId}");
         }
 
         StoryDTO story = new StoryDTO(title, body, departmentId);
 
         Story created = await storyDAO.CreateStoryAsync(story);
-        await departmentLogic.AddStoryAsync(departmentId,created.id);
+        //await departmentLogic.AddStoryAsync(departmentId,created.id);
         return created;
     }
 

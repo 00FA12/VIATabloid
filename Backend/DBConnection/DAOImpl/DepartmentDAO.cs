@@ -31,7 +31,7 @@ public class DepartmentDAO : IDepartmentDAO
                     id = (int)returnedValue,
                     stories = new List<int>()
                 };
-                connection.Close();
+                // connection.Close();
                 return created;
             }
         }
@@ -62,7 +62,7 @@ public class DepartmentDAO : IDepartmentDAO
                 name = (string)name,
                 id = depId
             };
-            connection.Close();
+            // connection.Close();
             return Task.FromResult(created);
         }
         catch (Exception e)
@@ -71,7 +71,7 @@ public class DepartmentDAO : IDepartmentDAO
         }
     }
 
-    public Task<Department> GetDepartmentByIdAsync(int depId)
+    public async Task<Department> GetDepartmentByIdAsync(int depId)
     {
         try
         {
@@ -83,8 +83,8 @@ public class DepartmentDAO : IDepartmentDAO
             Department dep = new();
 
 
-            using var reader = cmd.ExecuteReader();
-            reader.Read();
+            using var reader = await cmd.ExecuteReaderAsync();
+            await reader.ReadAsync();
             if (reader.GetInt32(reader.GetOrdinal("id")) == depId)
             {
                 var title = reader.GetString(reader.GetOrdinal("name"));
@@ -92,22 +92,24 @@ public class DepartmentDAO : IDepartmentDAO
                 dep = new Department
                 {
                     name = title,
-                    id = id,
-                    stories = new List<int>()
+                    id = id
                 };
             }
             connection.Close();
+
+
             connection.Open();
             List<int> sts = new List<int>();
             using var command = new NpgsqlCommand("SELECT id FROM story WHERE departmentid = @value1", connection);
             command.Parameters.AddWithValue("@value1", depId);
-            using var rd = command.ExecuteReader();
-            while(rd.Read())
+            using var rd = await command.ExecuteReaderAsync();
+            while(await rd.ReadAsync())
             {
-                sts.Add(rd.GetInt32(rd.GetOrdinal("id")));
+                var id = rd.GetInt32(rd.GetOrdinal("id"));
+                sts.Add(id);
             }
             dep.stories = sts.AsEnumerable();
-            return Task.FromResult(dep);
+            return dep;
         }
         catch (Exception e)
         {
@@ -115,28 +117,30 @@ public class DepartmentDAO : IDepartmentDAO
         }
     }
 
-    public Task<IEnumerable<Department>> GetDepartmentsAsync()
+    public async Task<IEnumerable<Department>> GetDepartmentsAsync()
     {
         try
         {
-            var deps = new List<Department>();
+            var ids = new List<int>();
             NpgsqlConnection connection = GetConnection();
             connection.Open();
-            using var cmd = new NpgsqlCommand("SELECT * FROM department", connection);
+            using var cmd = new NpgsqlCommand("SELECT id FROM department", connection);
             using var reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-                var name = reader.GetString(reader.GetOrdinal("name"));
-                var id = reader.GetInt32(reader.GetOrdinal("id"));
-                deps.Add(new Department
-                {
-                    name = name,
-                    id = id
-                });
+                int depId = reader.GetInt32(reader.GetOrdinal("id"));
+                ids.Add(depId);
             }
             connection.Close();
-            return Task.FromResult(deps.AsEnumerable());
+            var deps = new List<Department>();
+            for (int i = 0; i < ids.Count; i++)
+            {   
+                Department department = await GetDepartmentByIdAsync(ids.ElementAt(i));
+                deps.Add(department);
+            }
+
+            return deps.AsEnumerable();
         }
         catch (Exception e)
         {
