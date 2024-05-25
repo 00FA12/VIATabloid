@@ -29,11 +29,8 @@ jobs:
         - name: Test service URLs
           run: |
             minikube service list
-            echo "SERVICE_URL=$(minikube service backend --url)"
-            kubectl port-forward service/backend 80:80 &> /dev/null &
-            sleep 5
-            kubectl port-forward service/backend 80:80 &> /dev/null &
-        - run: |
+            SERVICE_URL=$(minikube service backend --url)
+            echo "SERVICE_URL=$SERVICE_URL"
             curl -i $SERVICE_URL
         - name: Cleanup
           run: |
