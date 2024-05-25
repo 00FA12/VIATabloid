@@ -1,0 +1,16 @@
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/bin/Debug/net8.0/application.deps.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/bin/Debug/net8.0/application.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/bin/Debug/net8.0/application.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/bin/Debug/net8.0/Domain.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/bin/Debug/net8.0/Domain.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/application.csproj.AssemblyReference.cache
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/application.AssemblyInfoInputs.cache
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/application.AssemblyInfo.cs
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/application.csproj.CoreCompileInputs.cache
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/application.sourcelink.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/application.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/refint/application.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/application.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/ref/application.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/Debug/net8.0/Applicat.44B5EDA2.Up2Date

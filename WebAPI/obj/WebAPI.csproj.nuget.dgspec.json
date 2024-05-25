@@ -1,0 +1,277 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/WebAPI.csproj": {}
+  },
+  "projects": {
+    "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/Application.csproj",
+        "projectName": "Application",
+        "projectPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/Application.csproj",
+        "packagesPath": "/Users/hmp/.nuget/packages/",
+        "outputPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/hmp/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/Domain.csproj": {
+                "projectPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/DBConnection/DBConnection.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/DBConnection/DBConnection.csproj",
+        "projectName": "DBConnection",
+        "projectPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/DBConnection/DBConnection.csproj",
+        "packagesPath": "/Users/hmp/.nuget/packages/",
+        "outputPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/DBConnection/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/hmp/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/Application.csproj": {
+                "projectPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/Application.csproj"
+              },
+              "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/Domain.csproj": {
+                "projectPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Npgsql": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/Domain.csproj",
+        "packagesPath": "/Users/hmp/.nuget/packages/",
+        "outputPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/hmp/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/WebAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/WebAPI.csproj",
+        "projectName": "WebAPI",
+        "projectPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/WebAPI.csproj",
+        "packagesPath": "/Users/hmp/.nuget/packages/",
+        "outputPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/hmp/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/Application.csproj": {
+                "projectPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/Application.csproj"
+              },
+              "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/DBConnection/DBConnection.csproj": {
+                "projectPath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/DBConnection/DBConnection.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

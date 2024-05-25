@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "dgSpecHash": "e9MHTrtDX3JXXDFCUEiJnW6IPeOYfoiY+hnoWXraR+uDe6DjhbRvzWnT62C/l+n1voCKoFo+RZw3W5jzvIGxlg==",
+  "success": true,
+  "projectFilePath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Tests/Tests.csproj",
+  "expectedPackageFiles": [
+    "/Users/hmp/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/coverlet.msbuild/6.0.2/coverlet.msbuild.6.0.2.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/microsoft.codecoverage/17.9.0/microsoft.codecoverage.17.9.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/microsoft.net.test.sdk/17.9.0/microsoft.net.test.sdk.17.9.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/microsoft.testplatform.objectmodel/17.9.0/microsoft.testplatform.objectmodel.17.9.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/microsoft.testplatform.testhost/17.9.0/microsoft.testplatform.testhost.17.9.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/moq/4.20.70/moq.4.20.70.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/npgsql/8.0.3/npgsql.8.0.3.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/system.diagnostics.eventlog/6.0.0/system.diagnostics.eventlog.6.0.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/xunit/2.8.0/xunit.2.8.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/xunit.abstractions/2.0.3/xunit.abstractions.2.0.3.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/xunit.analyzers/1.13.0/xunit.analyzers.1.13.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/xunit.assert/2.8.0/xunit.assert.2.8.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/xunit.core/2.8.0/xunit.core.2.8.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/xunit.extensibility.core/2.8.0/xunit.extensibility.core.2.8.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/xunit.extensibility.execution/2.8.0/xunit.extensibility.execution.2.8.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/xunit.runner.visualstudio/2.8.0/xunit.runner.visualstudio.2.8.0.nupkg.sha512"
+  ],
+  "logs": []
+}

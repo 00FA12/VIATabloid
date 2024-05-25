@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "u/ftWjMMhF2EGLaTw/qqrDaPfGrEmMQOQsyFLPlXX9jDoXhKW9Ohp5ImvaUmeBI8IsHfLmxdNplNVBIE/gjuuQ==",
+  "success": true,
+  "projectFilePath": "/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/DBConnection/DBConnection.csproj",
+  "expectedPackageFiles": [
+    "/Users/hmp/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "/Users/hmp/.nuget/packages/npgsql/8.0.3/npgsql.8.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

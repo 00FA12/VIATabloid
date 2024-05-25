@@ -1,0 +1,16 @@
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/WebAPI
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/appsettings.Development.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/appsettings.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/WebAPI.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/WebAPI.deps.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/WebAPI.runtimeconfig.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/WebAPI.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/Microsoft.AspNetCore.OpenApi.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/Microsoft.OpenApi.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/Swashbuckle.AspNetCore.Swagger.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/Application.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/Domain.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/Application.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/WebAPI/bin/Release/net8.0/publish/Domain.pdb

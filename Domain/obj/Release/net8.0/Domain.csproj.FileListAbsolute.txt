@@ -1,0 +1,12 @@
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/bin/Release/net8.0/Domain.deps.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/bin/Release/net8.0/Domain.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/bin/Release/net8.0/Domain.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/obj/Release/net8.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/obj/Release/net8.0/Domain.AssemblyInfoInputs.cache
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/obj/Release/net8.0/Domain.AssemblyInfo.cs
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/obj/Release/net8.0/Domain.csproj.CoreCompileInputs.cache
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/obj/Release/net8.0/Domain.sourcelink.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/obj/Release/net8.0/Domain.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/obj/Release/net8.0/refint/Domain.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/obj/Release/net8.0/Domain.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Domain/obj/Release/net8.0/ref/Domain.dll

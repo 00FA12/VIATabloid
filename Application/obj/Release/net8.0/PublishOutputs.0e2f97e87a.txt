@@ -1,0 +1,5 @@
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Application.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Application.deps.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Application.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Domain.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Domain.pdb

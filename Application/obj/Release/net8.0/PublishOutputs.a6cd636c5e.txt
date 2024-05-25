@@ -1,0 +1,5 @@
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/bin/Release/net8.0/publish/Application.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/bin/Release/net8.0/publish/Application.deps.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/bin/Release/net8.0/publish/Application.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/bin/Release/net8.0/publish/Domain.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/Application/bin/Release/net8.0/publish/Domain.pdb

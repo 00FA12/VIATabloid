@@ -1,0 +1,10 @@
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/DBConnection.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/DBConnection.deps.json
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/DBConnection.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Npgsql.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Application.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Domain.dll
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Domain.pdb
+/Users/hmp/Documents/VIA/4rd/DOC/Project/Backend/out/Application.pdb
