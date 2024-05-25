@@ -34,7 +34,7 @@ jobs:
             sleep 5
             kubectl port-forward service/backend 80:80 &> /dev/null &
         - run: |
-            curl -i http://localhost:80/
+            curl -i $SERVICE_URL
         - name: Cleanup
           run: |
             eval $(minikube docker-env -u)
