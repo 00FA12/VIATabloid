@@ -24,15 +24,15 @@ jobs:
           run: |
             kubectl apply -f deploy.yaml
             kubectl get pods --show-labels
-            kubectl wait --for=condition=Ready pod -l app=demo --timeout=5m
+            kubectl wait --for=condition=Ready pod -l app=backend --timeout=5m
             kubectl get all
         - name: Test service URLs
           run: |
             minikube service list
-            echo "SERVICE_URL=$(minikube service demo --url)"
-            kubectl port-forward service/demo 80:80 &> /dev/null &
+            echo "SERVICE_URL=$(minikube service backend --url)"
+            kubectl port-forward service/backend 80:80 &> /dev/null &
             sleep 5
-            kubectl port-forward service/demo 80:80 &> /dev/null &
+            kubectl port-forward service/backend 80:80 &> /dev/null &
         - run: |
             curl -i http://localhost:80/
         - name: Cleanup
