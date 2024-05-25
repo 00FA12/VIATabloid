@@ -17,8 +17,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IStoryDAO, StoryDAO>();
 builder.Services.AddScoped<IDepartmentDAO, DepartmentDAO>();
-builder.Services.AddScoped<ITabloidDao, TabloidDAO>();
-builder.Services.AddScoped<ITabloidLogic, TabloidLogic>();
 builder.Services.AddScoped<IStoryLogic, StoryLogic>();
 builder.Services.AddScoped<IDepartmentLogic, DepartmentLogic>();
 

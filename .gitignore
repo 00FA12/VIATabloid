@@ -9,3 +9,4 @@ DB/dataSources.local.xml
 */*/bin
 /DB/.idea
 Backend.zip
+*.tar

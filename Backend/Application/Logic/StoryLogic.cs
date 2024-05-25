@@ -33,7 +33,6 @@ public class StoryLogic : IStoryLogic
         StoryDTO story = new StoryDTO(title, body, departmentId);
 
         Story created = await storyDAO.CreateStoryAsync(story);
-        //await departmentLogic.AddStoryAsync(departmentId,created.id);
         return created;
     }
 
@@ -45,7 +44,6 @@ public class StoryLogic : IStoryLogic
             throw new Exception($"A story with id {storyId} doesn't exist");
         }
         await storyDAO.DeleteStoryAsync(storyId);
-        // await departmentLogic.RemoveStoryAsync(storyId);
         return existing;
     }
 

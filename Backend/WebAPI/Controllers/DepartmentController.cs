@@ -9,11 +9,9 @@ namespace WebAPI;
 public class DepartmentController : ControllerBase
 {
     private readonly IDepartmentLogic departmentLogic;
-    private readonly ITabloidLogic tabloidLogic;
-    public DepartmentController(IDepartmentLogic departmentLogic, ITabloidLogic tabloidLogic)
+    public DepartmentController(IDepartmentLogic departmentLogic)
     {
         this.departmentLogic = departmentLogic;
-        this.tabloidLogic = tabloidLogic;
     }
     [HttpPost]
     public async Task<ActionResult<Department>> CreateDepartmentAsync(DepartmentDTO departmentDTO)
