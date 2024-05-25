@@ -17,7 +17,7 @@ jobs:
           run: |
             export SHELL=/bin/bash
             eval $(minikube -p minikube docker-env)
-            docker build -f Dockerfile -t local/imagedoc .
+            docker-compose -f docker-compose.yml build
             echo -n "Verifying images: "
             docker images
         - name: Deploy to Minikube
