@@ -3,45 +3,39 @@ name: CD - Deploy to Minikube using Github Actions
 on: [push, pull_request]
 
 jobs:
-  # Build job
-  job1:
-    name: Build and Deploy to Minikube
-    # Run on Ubuntu using the latest version
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Start Minikube
-        id: minikube
-        uses: medyagh/setup-minikube@latest
-
-      - name: Try the cluster
-        run: kubectl get pods -A
-
-      - name: Build Image
-        run: |
-          export SHELL=/bin/bash
-          eval $(minikube -p minikube docker-env)
-          docker build -f ./Dockerfile -t local/cicd-example .
-          echo -n "Verifying images: "
-          docker images
-
-      - name: Deploy to Minikube
-        run: |
-          kubectl apply -f deploy.yaml
-          kubectl wait --for=condition=Ready pod -l app=cicd-example
-          kubectl get all
-
-      - name: Test service URLs
-        run: |
-          echo "SERVICE_URL=$(minikube service cicd-example --url)"
-          kubectl port-forward service/cicd-example 80:80 &> /dev/null &
-          sleep 5
-          kubectl port-forward service/cicd-example 8080:8080 &> /dev/null &
-          curl -i http://0.0.0.0:80/
-
-      - name: Cleanup
-        run: |
-          eval $(minikube docker-env -u)
-          minikube delete
+    job1:
+      name: Build and Deploy to Minikube
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - name: Start Minikube
+          id: minikube
+          uses: medyagh/setup-minikube@latest
+        - name: Try the cluster!
+          run: kubectl get pods -A
+        - name: Build Image
+          run: |
+            export SHELL=/bin/bash
+            eval $(minikube -p minikube docker-env)
+            docker build -f Dockerfile -t local/imagedoc .
+            echo -n "Verifying images: "
+            docker images
+        - name: Deploy to Minikube
+          run: |
+            kubectl apply -f deploy.yaml
+            kubectl get pods --show-labels
+            kubectl wait --for=condition=Ready pod -l app=demo --timeout=5m
+            kubectl get all
+        - name: Test service URLs
+          run: |
+            minikube service list
+            echo "SERVICE_URL=$(minikube service demo --url)"
+            kubectl port-forward service/demo 80:80 &> /dev/null &
+            sleep 5
+            kubectl port-forward service/demo 80:80 &> /dev/null &
+        - run: |
+            curl -i http://localhost:80/
+        - name: Cleanup
+          run: |
+            eval $(minikube docker-env -u)
+            minikube delete
