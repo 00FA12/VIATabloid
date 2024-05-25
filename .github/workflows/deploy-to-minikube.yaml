@@ -24,7 +24,7 @@ jobs:
           run: |
             kubectl apply -f deploy.yaml
             kubectl get pods --show-labels
-            kubectl wait --for=condition=Ready pod -l app=backend --timeout=5m
+            kubectl wait --for=condition=Ready pod -l app=backend --timeout=10m
             kubectl get all
         - name: Test service URLs
           run: |
